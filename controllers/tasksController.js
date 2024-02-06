@@ -1,3 +1,4 @@
+const Task = require("../models/task")
 
 
 function getTasks(req, res) {
@@ -13,13 +14,12 @@ function getSingleTask(req, res) {
     return res.status(200).json({ id })
 }
 
-function postTask(req, res) {
-    const { name } = req.body;
-    /*
-    old tasks = {...oldTasks, task}
-    */
+async function postTask(req, res) {
+    
+    const task  = await Task.create(req.body);
+    console.log(task)
 
-    return res.status(201).send(`hi ${name}`)
+    return res.status(201).json({success: true, task: task})
 }
 
 function patchTask(req, res) {
