@@ -15,11 +15,15 @@ function getSingleTask(req, res) {
 }
 
 async function postTask(req, res) {
-    
-    const task  = await Task.create(req.body);
-    console.log(task)
 
-    return res.status(201).json({success: true, task: task})
+    try {
+        const task = await Task.create(req.body);
+        console.log(task)
+
+        return res.status(201).json({ success: true, task: task })
+    } catch (e) {
+        return res.status(401).json({ success: false, msg: e.message })
+    }
 }
 
 function patchTask(req, res) {
@@ -37,7 +41,7 @@ function deleteTask(req, res) {
     /*
     old tasks = {...oldTasks, task}
     */
-    return res.status(201).json({id: `deleted: id ${id}`})
+    return res.status(201).json({ id: `deleted: id ${id}` })
 }
 
 module.exports = { getTasks, getSingleTask, postTask, patchTask, deleteTask }
