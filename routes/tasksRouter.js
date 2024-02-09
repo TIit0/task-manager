@@ -11,7 +11,7 @@ router.get("/:id", getSingleTask);
 // Post
 router.post("/", postTask);
 
-// Put
+// Patch
 router.patch("/:id", patchTask);
 
 // Delete
